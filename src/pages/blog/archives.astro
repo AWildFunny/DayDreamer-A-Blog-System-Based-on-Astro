@@ -4,7 +4,16 @@ import apis from "@scripts/apis";
 import utils from "@scripts/utils";
 
 const articles = await apis.getArticles(1, 10000);
-const groupedArticles = groupByYear(articles);
+const validArticles = articles.filter(article => {
+  try {
+    new URL(`/blog/${article.slug}`, 'http://example.com');
+    return true;
+  } catch {
+    console.error(`Invalid slug for article: ${article.title}`);
+    return false;
+  }
+});
+const groupedArticles = groupByYear(validArticles);
 
 interface GroupedArticles {
   [year: number]: GotArticle[];
