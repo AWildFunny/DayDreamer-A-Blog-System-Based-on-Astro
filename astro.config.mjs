@@ -17,5 +17,5 @@ export default defineConfig({
   redirects: {
     "/blog/1": "/blog",
   },
-  site: "https://skywt.cn",
+  site: "https://awildfunny.github.io",
 });
